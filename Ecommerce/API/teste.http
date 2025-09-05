@@ -3,10 +3,17 @@
 
 GET http://localhost:5089/
 
-### Requisição para a funcionalidade com GET
+### lISTAR TODOS OS PRODUTOS
 
-GET http://localhost:5089/funcionalidade
+GET http://localhost:5089//api/produto/listar
 
 ### Requisição para a funcionalidade com POST
 
-POST http://localhost:5089/funcionalidade
+POST http://localhost:5089/api/produto/cadastrar
+Content-Type: application/json
+
+{
+    "nome" : "Mouse",
+    "quantidade" : 123, 
+    "preco" : 85.5
+}
