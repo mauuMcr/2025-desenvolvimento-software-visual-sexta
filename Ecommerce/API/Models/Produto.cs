@@ -6,6 +6,8 @@ namespace API.Models;
 public class Produto
 {
 
+
+    //Construtor
     public Produto()
     {
         id = Guid.NewGuid().ToString();

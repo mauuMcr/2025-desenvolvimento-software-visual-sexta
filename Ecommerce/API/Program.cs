@@ -1,4 +1,5 @@
 using API.Models;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -47,15 +48,63 @@ app.MapGet("/", () => "API de Produtos");
 
 app.MapGet("/api/produto/listar", () =>
 {
-    return produtos;
+    //validar se existe alguma coisa dentro da lista
+    if (produtos.Count == 0)
+    {
+        return Results.BadRequest("Nenhum produto cadastrado");
+    }
+    else
+    {
+        return Results.Ok(produtos);
+    }
+    
 });
 
-app.MapPost("/api/produto/cadastrar", (Produto produto) =>
+app.MapPost("/api/produto/cadastrar", ([FromBody] Produto novoProduto) =>
 {
 
-    produtos.Add(produto);
+    foreach (var produtoCadastrado in produtos)
+    {
+        if (produtoCadastrado.Nome == novoProduto.Nome)
+        {
+            return Results.Conflict("Produto já cadastrado");
+        }
+    }
+    produtos.Add(novoProduto);
+    return Results.Created("", novoProduto);
+});
+
+
+app.MapGet("/api/produto/buscar/{nome}", ([FromRoute]string nome) =>
+{
+
+    //Procura o produto na lista
+
+    // foreach (Produto produtoCadastrado in produtos)
+    // {
+    //     if (produtoCadastrado.Nome == nome)
+    //     {
+    //         return Results.Ok(produtoCadastrado);
+    //     }
+    // }
+    // return Results.NotFound("Produto não encontrado");
+
+
+    //Expressão Lambda
+    //Produto produtoEncontrado = produtos.FirstOrDefault(x => x.Nome.Contains(nome));
+    Produto? produtoEncontrado = produtos.FirstOrDefault(x => x.Nome.Contains(nome));
+
+    if (produtoEncontrado == null)
+    {
+        return Results.NotFound("Produto não encontrado");
+    }
+    else
+    {
+        return Results.Ok(produtoEncontrado);
+    }
 
 });
+
 
 app.Run();
 
