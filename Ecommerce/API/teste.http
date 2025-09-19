@@ -13,10 +13,23 @@ POST http://localhost:5089/api/produto/cadastrar
 Content-Type: application/json
 
 {
-    "nome" : "Mouse",
-    "quantidade" : 123, 
+    "nome" : "Placa de Vídeo RTX 4090",
+    "quantidade" : 1, 
     "preco" : 85.5
 }
 
 ### Buscar PRODUTOS por nome
 GET http://localhost:5089/api/produto/buscar/Monitor 24%22
+
+### Deletar PRODUTOS por id
+DELETE http://localhost:5089/api/produto/remover/85a93504-7c3e-4d5d-8d90-ab4f66567286
+
+### Alterar PRODUTOS por id
+PATCH http://localhost:5089/api/produto/alterar/f412f088-265e-41d7-ae13-f63df9e9ad93
+Content-Type: application/json
+
+{
+    "nome" : "Placa de Vídeo RTX 4090",
+    "quantidade" : 2, 
+    "preco" : 90.5
+}

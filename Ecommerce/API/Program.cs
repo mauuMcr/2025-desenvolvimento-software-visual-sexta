@@ -43,6 +43,7 @@ var app = builder.Build();
 //Requisições
 // - Endereço/URL
 // - Método HTTP
+// - Dados: rota (url) e corpo (opcional)
 
 app.MapGet("/", () => "API de Produtos");
 
@@ -72,6 +73,33 @@ app.MapPost("/api/produto/cadastrar", ([FromBody] Produto novoProduto) =>
     }
     produtos.Add(novoProduto);
     return Results.Created("", novoProduto);
+});
+
+//remover produto pelo Id
+app.MapDelete("/api/produto/remover/{id}", ([FromRoute] string id) =>
+{
+    Produto? produtoRemover = produtos.FirstOrDefault(x => x.Id == id);
+    if (produtoRemover == null)
+    {
+        return Results.NotFound("Produto não encontrado");
+    }
+    produtos.Remove(produtoRemover);
+    return Results.Ok("Produto removido com sucesso");
+});
+
+//alterar produto pelo Id
+app.MapPatch("/api/produto/alterar/{id}", ([FromRoute] string id, [FromBody] Produto produtoAlterado) =>
+{
+    Produto? resultado = produtos.FirstOrDefault(x => x.Id == id);
+    if (resultado == null)
+    {
+        return Results.NotFound("Produto não encontrado");
+    }
+    resultado.Nome = produtoAlterado.Nome;
+    resultado.quantidade = produtoAlterado.quantidade;
+    resultado.preco = produtoAlterado.preco;
+
+    return Results.Ok(resultado);
 });
 
 
@@ -108,8 +136,4 @@ app.MapGet("/api/produto/buscar/{nome}", ([FromRoute]string nome) =>
 
 app.Run();
 
-
-Produto produto = new Produto();
-produto.Nome = "Bolacha";
-
-Console.WriteLine(produto.Nome);
+AppDataContext ctx = new AppDataContext();
