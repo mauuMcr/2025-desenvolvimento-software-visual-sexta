@@ -14,8 +14,11 @@ public class Produto
         CriadoEm = DateTime.Now;
     }
 
-    
-    public string Nome { get; set; }
+
+    public string Nome { get; set; } = string.Empty;
+
+    public string Descricao { get; set; } = string.Empty;
+
     public string Id { get; internal set; }
     public int quantidade { get; set; }
     public double preco { get; set; }
