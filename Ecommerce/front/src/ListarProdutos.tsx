@@ -28,7 +28,7 @@ function ListarProdutos(){
             }
 
             const dados = await resposta.json();
-            console.log(dados);
+            console.table(dados);
 
             
         } catch (error) {
