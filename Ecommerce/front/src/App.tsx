@@ -2,14 +2,15 @@
 
 // Componentes
 
-import ListarProdutos from "./ListarProdutos";
+import CadastrarProduto from "./components/pages/produto/CadastrarProduto";
+import ListarProdutos from "./components/pages/produto/ListarProdutos";
 
 // HTML / CSS e JS ou TS
 function App() {
   return (
     <div>
-      <h1>Minha primeira aplicação em React</h1>
         <ListarProdutos/>
+        <CadastrarProduto/>
     </div>
   );
 }

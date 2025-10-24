@@ -13,7 +13,7 @@ POST http://localhost:5089/api/produto/cadastrar
 Content-Type: application/json
 
 {
-    "nome" : "Placa de Vídeo RTX 4090",
+    "nome" : "Placaaa de Vídeo RTX 4090",
     "quantidade" : 1, 
     "descricao" : "Eletronico",
     "preco" : 85.5
@@ -23,7 +23,7 @@ Content-Type: application/json
 GET http://localhost:5089/api/produto/buscar/038ab2d3-b7dd-4f5b-bcbc-3ef78a9ae427
 
 ### Deletar PRODUTOS por id
-DELETE http://localhost:5089/api/produto/remover/2f452726-7292-4c1c-bc6f-4a940dd6dc52
+DELETE http://localhost:5089/api/produto/remover/038ab2d3-b7dd-4f5b-bcbc-3ef78a9ae427
 
 ### Alterar PRODUTOS por id
 PATCH http://localhost:5089/api/produto/alterar/f412f088-265e-41d7-ae13-f63df9e9ad93
